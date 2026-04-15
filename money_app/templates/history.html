@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>履歴</h1>
+
+<ul>
+{% for cycle in cycles %}
+    <li>
+        {{ cycle.start_date }} 〜 {{ cycle.end_date }} /
+        給料: {{ cycle.income }} 円
+    </li>
+{% endfor %}
+</ul>
+
+{% endblock %}

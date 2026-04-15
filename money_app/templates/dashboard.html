@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>ダッシュボード</h1>
+
+<h2>残り使える金額</h2>
+<p style="font-size: 32px;">{{ remaining }} 円</p>
+
+<h3>1日あたり使える金額</h3>
+<p>{{ daily }} 円 / 日</p>
+
+{% endblock %}
