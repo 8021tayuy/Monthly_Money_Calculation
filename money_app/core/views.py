@@ -4,7 +4,18 @@ from datetime import date
 from .models import Expense, PlannedExpense, SalaryCycle
 from .forms import ExpenseForm, PlannedExpenseForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login
+from .forms import SignupForm
 
+def signup(request):
+    form = SignupForm(request.POST or None)
+
+    if form.is_valid():
+        user = form.save()
+        login(request, user)  # 作成後ログイン
+        return redirect('dashboard')
+
+    return render(request, 'registration/signup.html', {'form': form})
 
 def get_current_cycle(user):
     today = date.today()

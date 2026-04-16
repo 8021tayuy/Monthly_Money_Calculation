@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>サインアップ</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">登録</button>
+</form>
+
+<a href="/accounts/login/">ログインはこちら</a>
+
+</body>
+</html>
