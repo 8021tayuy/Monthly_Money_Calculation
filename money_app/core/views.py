@@ -3,6 +3,7 @@ from django.db.models import Sum
 from datetime import date
 from .models import Expense, PlannedExpense, SalaryCycle
 from .forms import ExpenseForm, PlannedExpenseForm
+from django.contrib.auth.decorators import login_required
 
 
 def get_current_cycle(user):
@@ -39,6 +40,7 @@ def daily_budget(user):
     return remaining // days_left if days_left > 0 else 0
 
 
+@login_required
 def dashboard(request):
     remaining = calculate_remaining(request.user)
     daily = daily_budget(request.user)
@@ -49,6 +51,7 @@ def dashboard(request):
     })
 
 
+@login_required
 def add_expense(request):
     form = ExpenseForm(request.POST or None)
 
@@ -61,6 +64,7 @@ def add_expense(request):
     return render(request, 'add_expense.html', {'form': form})
 
 
+@login_required
 def add_planned(request):
     form = PlannedExpenseForm(request.POST or None)
 
@@ -73,6 +77,7 @@ def add_planned(request):
     return render(request, 'add_planned.html', {'form': form})
 
 
+@login_required
 def history(request):
     cycles = SalaryCycle.objects.filter(user=request.user).order_by('-start_date')
     return render(request, 'history.html', {'cycles': cycles})
